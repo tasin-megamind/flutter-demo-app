@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:io';
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
@@ -23,6 +23,10 @@ void main() {
     FlutterDriver driver;
 
     setUpAll(() async {
+//      final Map<String, String> envVars = Platform.environment;
+//      final String adbPath = envVars['ANDROID_SDK_ROOT'] + '/platform-tools/adb';
+//      await Process.run(adbPath , ['shell' ,'pm', 'grant', 'com.startup_namer', 'android.permission.READ_EXTERNAL_STORAGE']);
+//      await Process.run(adbPath , ['shell' ,'pm', 'grant', 'com.startup_namer', 'android.permission.READ_PHONE_STATE']);
       driver = await FlutterDriver.connect();
     });
 

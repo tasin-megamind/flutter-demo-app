@@ -36,11 +36,14 @@ class RandomWordsState extends State<RandomWords> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: appBar('Startup Name Generator', _appBarActions()),
       body: _buildSuggestions(),
     );
   }
+
+
 
 
 
@@ -77,16 +80,27 @@ class RandomWordsState extends State<RandomWords> {
         builder: (BuildContext context) {
 
           int i = 0;
-
           final Iterable<ListTile> tiles = _saved.map(
               (WordPair pair) {
+                var icon_ = Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                  key: Key('heart_saved_$i'),
+
+                );
                 i = i + 1;
                 return ListTile(
                   title: Text(
                     pair.asPascalCase,
                     style: _biggerFont,
                     key: Key('saved${i-1}')
-                  )
+                  ),
+                  trailing: icon_,
+                  onTap: () {
+                    setState(() {
+                      _saved.remove(pair);
+                    });
+                  },
                 );
               }
           );
@@ -131,7 +145,7 @@ class RandomWordsState extends State<RandomWords> {
       color: alreadySaved ? Colors.red : null,
       key: Key('heart_index_$index'),
     );
-    log(icon_.toDiagnosticsNode().getProperties().toString());
+//    log(icon_.toDiagnosticsNode().getProperties().toString());
     return ListTile(
       title: Text(
         pair.asPascalCase,
